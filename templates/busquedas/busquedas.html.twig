@@ -1,0 +1,40 @@
+<h1>UTILIZANDO LAS CONSULTAS EN SYMFONY</h1>
+
+<a href="{{ path('persistir')}}">Registrar Canciones</a> <br><br>
+  
+  {#
+{{find.nombreCancion}} - {{find.tonalidad}}
+{{find.nombreCancion}} - {{find.tonalidad}}
+<hr>
+{{findOneBy.nombreCancion}} - {{findOneBy.tonalidad}}
+{{findOneBy.nombreCancion}} - {{findOneBy.tonalidad}}
+<hr>
+{% for canciones3 in findBy %}
+{{ canciones3.nombreCancion }} - {{ canciones3.genero}} <br>
+{% endfor %}
+
+#}
+
+<hr>
+<table>
+<tr>
+  <td><strong>Nombre de Canción</strong></td>
+  <td><strong>Genero</strong></td>
+  </tr>
+{% for BuscarCancion in BuscarCancion %}
+<tr>
+<td>{{ BuscarCancion.nombreCancion }}</td> 
+<td>({{BuscarCancion.genero}})</td> <br>
+</tr>
+</table>
+{% endfor %}
+
+{# 
+
+{{dump(findOneBy)}}
+
+{{dump(findBy)}}
+
+{{dump(findAll)}}
+
+#}

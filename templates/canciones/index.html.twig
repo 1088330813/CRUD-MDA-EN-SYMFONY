@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Canciones index{% endblock %}
+
+{% block body %}
+    <h1>Canciones index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NombreCancion</th>
+                <th>Letra</th>
+                <th>Tematica</th>
+                <th>Tonalidad</th>
+                <th>Tempo</th>
+                <th>Genero</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cancione in canciones %}
+            <tr>
+                <td>{{ cancione.id }}</td>
+                <td>{{ cancione.nombreCancion }}</td>
+                <td>{{ cancione.letra }}</td>
+                <td>{{ cancione.tematica }}</td>
+                <td>{{ cancione.tonalidad }}</td>
+                <td>{{ cancione.tempo }}</td>
+                <td>{{ cancione.genero }}</td>
+                <td>
+                    <a href="{{ path('canciones_show', {'id': cancione.id}) }}">show</a>
+                    <a href="{{ path('canciones_edit', {'id': cancione.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('canciones_new') }}">Create new</a>
+{% endblock %}

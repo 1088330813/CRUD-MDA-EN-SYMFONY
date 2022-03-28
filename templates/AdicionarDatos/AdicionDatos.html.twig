@@ -1,0 +1,40 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %} Registro de Productos {% endblock %}
+
+{% block body %}
+
+<a href="{{ path ('buscadores', {'nombre':'registrar'}) }}">Consultar Canciones</a>
+
+    <h1>Registra tu nueva Canción:</h1> 
+
+   <br />
+<div class="content"> 
+<div class="col-sm-6">
+ <form action="{{ path('haceradiciondatos') }}" method="POST"> 
+  <label for="ncancion">Nombre de Canción:</label><br>
+  <input type="text" id="ncancion" name="ncancion" required="required"><br>
+  <label for="letra">Letra:</label><br>
+  <input type="text" id="letra" name="letra" value=""><br>
+    <label for="fname">Tematica:</label><br>
+  <input type="text" id="tematica" name="tematica" value=""><br>
+  <label for="lname">Tonalidad:</label><br>
+  <input type="text" id="tonalidad" name="tonalidad" value=""><br>
+    <label for="fname">Tempo:</label><br>
+  <input type="number" id="tempo" name="tempo" value=""><br>
+  <label for="genero">Genero:</label><br>
+  <input type="text" id="genero" name="genero" value=""><br><br>
+  <label for="Generos">Tono:</label>
+  <select name="generos">
+  <option value="">Seleccion Categoria</option>
+  {% for cocosloco in cocoslocos %}
+  <option value="{{ cocosloco.id }}">{{ cocosloco.nombreGeneros }}</option>
+  {% endfor %}
+  </select><hr>
+    <button type="submit" class="btn btn-primary">Enviar</button> <br>
+</form>
+</div>
+</div>
+
+  {% endblock %}

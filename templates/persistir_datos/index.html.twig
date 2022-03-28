@@ -1,0 +1,29 @@
+
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<a href="{{ path ('buscadores', {'nombre':'registrar'}) }}">Consultar Canciones</a>
+    <h1>Registra tu nueva Canción:</h1>
+   <br />
+   {{ form_start(form) }}
+   {{ form_widget(form) }}
+   {{ form_end(form) }}
+
+ {# <form action="NuevasCancionesController.php" method="POST"> 
+  <label for="ncancion">Nombre de Canción:</label><br>
+  <input type="text" id="ncancion" name="ncancion"><br>
+  <label for="letra">Letra:</label><br>
+  <input type="text" id="letra" name="letra"><br>
+    <label for="fname">Tematica:</label><br>
+  <input type="text" id="tematica" name="tematica"><br>
+  <label for="lname">Tonalidad:</label><br>
+  <input type="text" id="tonalidad" name="tonalidad"><br>
+    <label for="fname">Tempo:</label><br>
+  <input type="number" id="tempo" name="tempo"><br>
+  <label for="genero">Genero:</label><br>
+  <input type="text" id="genero" name="genero"><br>
+  <input type="submit" value="Submit"><br>
+</form> #}
+
+  {% endblock %}

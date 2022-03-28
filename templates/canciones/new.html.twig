@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Canciones{% endblock %}
+
+{% block body %}
+    <h1>Create new Canciones</h1>
+
+    {{ include('canciones/_form.html.twig') }}
+
+    <a href="{{ path('canciones_index') }}">back to list</a>
+{% endblock %}

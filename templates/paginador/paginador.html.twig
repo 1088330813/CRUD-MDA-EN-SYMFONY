@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+ {% block title %}
+ {{ parent() }} - Consultas
+ {% endblock %}
+
+{% block body %}
+<a href="{{ path('persistir')}}">Registrar Canciones</a> <br><br>
+
+<div class="count">
+    {{ pagination.getTotalItemCount }}
+</div>
+<table class="table">
+<thead class="thead-light">
+    <tr>
+        {# sorting of properties based on query components #}
+        <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}</th>
+        <th{% if pagination.isSorted('a.nombre') %} class="sorted"{% endif %}>
+            {{ knp_pagination_sortable(pagination, 'Nombre de Canción', 'a.nombre') }}
+        </th>
+        <th{% if pagination.isSorted('a.genero') %} class="sorted"{% endif %}>
+            {{ knp_pagination_sortable(pagination, 'Genero', 'a.genero') }}
+        </th>
+          <th{% if pagination.isSorted('a.tonalidad') %} class="sorted"{% endif %}>
+            {{ knp_pagination_sortable(pagination, 'Tonalidad', 'a.tonalidad') }}
+        </th>
+          <th{% if pagination.isSorted('a.tempo') %} class="sorted"{% endif %}>
+            {{ knp_pagination_sortable(pagination, 'Tempo', 'a.tempo') }}
+        </th>
+          <th{% if pagination.isSorted('a.tematica') %} class="sorted"{% endif %}>
+          {{ knp_pagination_sortable(pagination, 'Tematica', 'a.tematica') }}
+        </th>
+         <th{% if pagination.isSorted('a.acciones') %} class="sorted"{% endif %}>
+          {{ knp_pagination_sortable(pagination, 'Acciones', 'a.acciones') }}
+        </th>
+
+     
+    </tr>
+
+    {# table body #}
+    {% for article in pagination %}
+        <tr {% if loop.index is odd %}class="color"{% endif %}>
+            <td>{{ article.id }}</td>
+            <td>{{ article.nombreCancion }}</td>
+            <td>{{ article.genero }} </td>
+            <td>{{ article.tonalidad }} </td>
+            <td>{{ article.tempo }} </td>
+            <td>{{ article.tematica }} </td>
+            <td><button>Modificar</button>
+            <button>Eliminar</button></td>
+
+        </tr>
+    {% endfor %}
+    </thead>
+
+</table>
+
+{# display navigation #}
+<div class="navigation">
+    {{ knp_pagination_render(pagination) }}
+</div>
+
+
+{% endblock %}
