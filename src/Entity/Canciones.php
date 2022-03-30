@@ -57,6 +57,11 @@ class Canciones
      */
     private $generos;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Generos::class, cascade={"persist", "remove"})
+     */
+    private $generoId;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -142,6 +147,18 @@ class Canciones
     public function setGeneros(int $generos): self
     {
         $this->generos = $generos;
+
+        return $this;
+    }
+
+    public function getGeneroId(): ?Generos
+    {
+        return $this->generoId;
+    }
+
+    public function setGeneroId(?Generos $generoId): self
+    {
+        $this->generoId = $generoId;
 
         return $this;
     }

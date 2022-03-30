@@ -46,9 +46,9 @@
             <td>{{ article.tonalidad }} </td>
             <td>{{ article.tempo }} </td>
             <td>{{ article.tematica }} </td>
-            <td><button>Modificar</button>
-            <button>Eliminar</button></td>
-
+            <td><a class="btn btn-warning" href="{{ path('modificar',{'id': article.id })}}">Modificar</a>
+            <a class="btn btn-danger" href="{{ path('eliminarDatos',{'id': article.id })}}">Eliminar</a></td>
+        
         </tr>
     {% endfor %}
     </thead>

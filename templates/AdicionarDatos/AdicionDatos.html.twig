@@ -1,5 +1,7 @@
 
+
 {% extends 'base.html.twig' %}
+
 
 {% block title %} Registro de Productos {% endblock %}
 
@@ -14,7 +16,7 @@
 <div class="col-sm-6">
  <form action="{{ path('haceradiciondatos') }}" method="POST"> 
   <label for="ncancion">Nombre de Canción:</label><br>
-  <input type="text" id="ncancion" name="ncancion" required="required"><br>
+  <input value="{{find}}" type="text" id="ncancion" name="ncancion" required="required"><br>
   <label for="letra">Letra:</label><br>
   <input type="text" id="letra" name="letra" value=""><br>
     <label for="fname">Tematica:</label><br>
@@ -25,7 +27,7 @@
   <input type="number" id="tempo" name="tempo" value=""><br>
   <label for="genero">Genero:</label><br>
   <input type="text" id="genero" name="genero" value=""><br><br>
-  <label for="Generos">Tono:</label>
+  <label for="Generos">Generos:</label>
   <select name="generos">
   <option value="">Seleccion Categoria</option>
   {% for cocosloco in cocoslocos %}

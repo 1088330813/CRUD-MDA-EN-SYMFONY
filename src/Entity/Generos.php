@@ -29,6 +29,8 @@ class Generos
      */
     private $canciones;
 
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,5 +56,17 @@ class Generos
     public function getProducts(): Collection
     {
         return $this->canciones;
+    }
+
+    public function getGeneroId(): ?Canciones
+    {
+        return $this->generoId;
+    }
+
+    public function setGeneroId(?Canciones $generoId): self
+    {
+        $this->generoId = $generoId;
+
+        return $this;
     }
 }

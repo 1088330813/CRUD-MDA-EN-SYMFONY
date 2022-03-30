@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Canciones;
+use App\Controller\PersistirDatosController;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Config\Doctrine\Orm\EntityManagerConfig\DqlConfig;

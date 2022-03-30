@@ -1,0 +1,33 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %} Modificar Productos {% endblock %}
+
+{% block body %}
+
+<a href="{{ path ('buscadores', {'nombre':'registrar'}) }}">Consultar Canciones</a>
+
+    <h1>Modifica tu Registro:</h1> 
+
+   <br />
+<div class="content"> 
+<div class="col-sm-6">
+ <form action="{{ path('datosmodificados') }}" method="PUT"> 
+  <label for="ncancion">Nombre de Canción:</label><br>
+  <input value="{{find.nombreCancion}}" type="text" id="ncancion" name="ncancion" required="required"><br>
+  <label for="letra">Letra:</label><br>
+  <input value="{{find.letra}}"type="text" id="letra" name="letra" value=""><br>
+    <label for="fname">Tematica:</label><br>
+  <input value="{{find.tematica}}" type="text" id="tematica" name="tematica" value=""><br>
+  <label for="lname">Tonalidad:</label><br>
+  <input value="{{find.tonalidad}}" type="text" id="tonalidad" name="tonalidad" value=""><br>
+    <label for="fname">Tempo:</label><br>
+  <input value="{{find.tempo}}" type="number" id="tempo" name="tempo" value=""><br>
+  <label for="genero">Genero:</label><br>
+  <input value="{{find.genero}}" type="text" id="genero" name="genero" value=""><br><br>
+    <button type="submit" class="btn btn-primary">Enviar</button> <br>
+</form>
+</div>
+</div>
+
+  {% endblock %}

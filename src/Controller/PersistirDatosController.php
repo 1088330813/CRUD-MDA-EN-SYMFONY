@@ -115,9 +115,11 @@ class PersistirDatosController extends AbstractController
     {        
         $entityManager = $this->getDoctrine()->getManager();
         $cocoslocos = $entityManager->getRepository(Generos::class)->findBy([], ['id'=>'ASC']);
+        $datoloco = "reloquisimo";
         
        return $this->render('AdicionarDatos/AdicionDatos.html.twig', [
             'cocoslocos' => $cocoslocos,
+            'datoloco' => $datoloco,
             
         ]);
 
@@ -135,15 +137,22 @@ class PersistirDatosController extends AbstractController
     {       
         // $all_params = $request->request->all();
         // var_dump($all_params);
+      
         $ncancion = $request->get("ncancion");
         $tonalidad = $request->get("tonalidad");
         $tempo = $request->get("tempo");
         $tematica = $request->get("tematica");
         $letra = $request->get("letra");
         $genero = $request->get("genero");
-        $generos = $request->get("tonoss");
-    
-
+        // $generos = $request->get("generos");
+        // $em = $this->getDoctrine()->getManager();
+        // $getGeneroId= intval($generos);
+        // $queryGenero = $em->getRepository(Generos::class)->find(1);
+        // dd();
+        // dd(gettype($getGeneroId), $getGeneroId);
+        // $generoRepositorio = $em->getRepository(Canciones::class);
+        // $queryRepositorio = $generoRepositorio->findBy(['id' =>$generos]);
+        // dd($ncancion,$tonalidad,$tempo,$tematica,$letra,$genero,$generos);
         $enviarCanciones = new Canciones();
         $enviarCanciones->setNombreCancion($ncancion);
         $enviarCanciones->setTematica($tematica);
@@ -151,15 +160,19 @@ class PersistirDatosController extends AbstractController
         $enviarCanciones->setTempo($tempo);
         $enviarCanciones->setGenero($genero);
         $enviarCanciones->setLetra($letra);
+
+        // $enviarCanciones->setGeneros($getGeneroId);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($enviarCanciones);
+        $entityManager->flush();
       
      
-            $enviargeneros = new Canciones();
-            $enviargeneros->setGeneros($generos);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($enviargeneros);
-            $entityManager->flush();
+            // $enviargeneros = new Canciones();
+            // $generosEnteros = (int)$generos;
+            // $enviargeneros->setGeneros($queryGenero->getId());
+            // $entityManager = $this->getDoctrine()->getManager();
+            // $entityManager->persist($enviargeneros);
+            
         // $enviarCanciones->setTono($tono);
 
      
@@ -176,5 +189,70 @@ class PersistirDatosController extends AbstractController
     //         'all_params' => $all_params,
        
     //    ]);
+}
+     /**
+     * @Route("/modificar/{id}", name="modificar")
+     */
+
+    public function modificarCanciones($id){
+        $em = $this->getDoctrine()->getManager();
+         $canciones = $em->getRepository(Canciones::class)->find($id);
+             
+
+        return $this->render('modificar/modificar.html.twig', 
+        array('find'=>$canciones,
+
+       ));
+
+    }
+        /**
+     * @Route("/datosmodificados", name="datosmodificados")
+     */
+    public function DatosModificados(Request $request): Response
+    {       
+        // $em = $this->getDoctrine()->getRepository(Canciones::class)->find($id);
+        // $form = $this->createForm(Canciones::class, $em);
+        // $form->handleRequest($request);
+        // if ($form->isSubmitted()&&$form->isValid()){
+        //     $entityManager = $this->getDoctrine()->getManager();
+        //     $entityManager->persist($em);
+        //     $entityManager->flush();
+        // }
+        
+        $ncancion = $request->get("ncancion");
+        $tonalidad = $request->get("tonalidad");
+        $tempo = $request->get("tempo");
+        $tematica = $request->get("tematica");
+        $letra = $request->get("letra");
+        $genero = $request->get("genero");
+        $enviarCanciones = new Canciones();
+        $enviarCanciones->setNombreCancion($ncancion);
+        $enviarCanciones->setTematica($tematica);
+        $enviarCanciones->setTonalidad($tonalidad);
+        $enviarCanciones->setTempo($tempo);
+        $enviarCanciones->setGenero($genero);
+        $enviarCanciones->setLetra($letra);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($enviarCanciones);
+        $entityManager->flush();
+       
+
+        return $this->render('modificar/datosmodificados.html.twig');
+
+}
+   /**
+     * @Route("/eliminar/{id}", name="eliminarDatos")
+     */
+    public function eliminarDatos($id): Response
+    {   
+        $data = $this->getDoctrine()->getRepository(Canciones::class)->find($id);
+        $entityManager = $this->getDoctrine()->getManager();  
+        $entityManager->remove($data);
+        $entityManager->flush();
+       
+        $this->addFlash('notice', "borrado correctamente");
+
+        return $this->render('modificar/datosmodificados.html.twig');
+
 }
 }
