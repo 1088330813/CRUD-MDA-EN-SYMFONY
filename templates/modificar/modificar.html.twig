@@ -25,7 +25,8 @@
   <input value="{{find.tempo}}" type="number" id="tempo" name="tempo" value=""><br>
   <label for="genero">Genero:</label><br>
   <input value="{{find.genero}}" type="text" id="genero" name="genero" value=""><br><br>
-    <button type="submit" class="btn btn-primary">Enviar</button> <br>
+  <a class="btn btn-warning" href="{{ path('modificar',{'id': find.id })}}">Modificar</a>
+    {# <button type="submit" class="btn btn-primary">Enviar</button> <br> #}
 </form>
 </div>
 </div>

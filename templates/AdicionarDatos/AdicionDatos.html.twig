@@ -7,7 +7,7 @@
 
 {% block body %}
 
-<a href="{{ path ('buscadores', {'nombre':'registrar'}) }}">Consultar Canciones</a>
+<a href="{{ path ('paginador') }}">Consultar Canciones</a>
 
     <h1>Registra tu nueva Canción:</h1> 
 
@@ -16,7 +16,7 @@
 <div class="col-sm-6">
  <form action="{{ path('haceradiciondatos') }}" method="POST"> 
   <label for="ncancion">Nombre de Canción:</label><br>
-  <input value="{{find}}" type="text" id="ncancion" name="ncancion" required="required"><br>
+  <input type="text" id="ncancion" name="ncancion" required="required"><br>
   <label for="letra">Letra:</label><br>
   <input type="text" id="letra" name="letra" value=""><br>
     <label for="fname">Tematica:</label><br>
@@ -27,12 +27,12 @@
   <input type="number" id="tempo" name="tempo" value=""><br>
   <label for="genero">Genero:</label><br>
   <input type="text" id="genero" name="genero" value=""><br><br>
-  <label for="Generos">Generos:</label>
-  <select name="generos">
+  {# <label for="Generos">Generos:</label> #}
+  {# <select name="generos">
   <option value="">Seleccion Categoria</option>
   {% for cocosloco in cocoslocos %}
   <option value="{{ cocosloco.id }}">{{ cocosloco.nombreGeneros }}</option>
-  {% endfor %}
+  {% endfor %} #}
   </select><hr>
     <button type="submit" class="btn btn-primary">Enviar</button> <br>
 </form>

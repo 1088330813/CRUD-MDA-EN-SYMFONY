@@ -44,9 +44,10 @@ public function BuscarTodasLasCanciones()
 {
         return
         $this->getEntityManager()
-        ->createQuery('SELECT canciones.nombreCancion, canciones.id, canciones.genero
-            FROM app\Entity\Canciones canciones'
-        );
+        ->createQuery("SELECT canciones.id,canciones.nombreCancion,canciones.tematica, canciones.tonalidad,canciones.genero, canciones.tempo
+            FROM app\Entity\Canciones canciones"
+        )
+        ->getResult();
         
 
 }

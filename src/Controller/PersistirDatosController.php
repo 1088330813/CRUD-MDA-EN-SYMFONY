@@ -86,13 +86,13 @@ class PersistirDatosController extends AbstractController
 
 
     /**
-     * @Route("/paginador/{genero}", name="paginador")
+     * @Route("/paginador", name="paginador")
      */
 
-    public function index(PaginatorInterface $paginator, Request $request, $genero){
+    public function index(PaginatorInterface $paginator, Request $request){
 
         $em = $this->getDoctrine()->getManager();
-        $query = $em->getRepository(Canciones::class)->BuscarCancion($genero);
+        $query = $em->getRepository(Canciones::class)->BuscarTodasLasCanciones();
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
@@ -195,7 +195,7 @@ class PersistirDatosController extends AbstractController
      */
 
     public function modificarCanciones($id){
-        $em = $this->getDoctrine()->getManager();
+         $em = $this->getDoctrine()->getManager();
          $canciones = $em->getRepository(Canciones::class)->find($id);
              
 
@@ -249,10 +249,15 @@ class PersistirDatosController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();  
         $entityManager->remove($data);
         $entityManager->flush();
-       
-        $this->addFlash('notice', "borrado correctamente");
+    
+        if ($entityManager){
+            $this->addFlash(
+                'notice',
+                'Tus cambios se han guardado!'
+            );
 
-        return $this->render('modificar/datosmodificados.html.twig');
-
+        return $this->redirectToRoute('paginador');
+      
+        }
 }
 }
