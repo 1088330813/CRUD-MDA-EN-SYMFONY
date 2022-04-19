@@ -175,9 +175,14 @@ class PersistirDatosController extends AbstractController
             
         // $enviarCanciones->setTono($tono);
 
-     
+        if ($entityManager){
+            $this->addFlash(
+                'noticeAdicion',
+                'Una Canción más para tus repertorios!'
+            );
+        }
 
-        return $this->render('AdicionarDatos/HacerAdicionDatos.html.twig');
+        return $this->render('AdicionarDatos/AdicionDatos.html.twig');
     //    return new JsonResponse([
     //        'generos' => $generos,
     //         'nombre_cancion' => $ncancion,
@@ -268,12 +273,15 @@ class PersistirDatosController extends AbstractController
    /**
      * @Route("/eliminar/{id}", name="eliminarDatos")
      */
-    public function eliminarDatos($id): Response
+    public function eliminarDatos(Request $resquest, $id): Response
     {   
-        $data = $this->getDoctrine()->getRepository(Canciones::class)->find($id);
+        $cancionaeliminar = $this->getDoctrine()->getRepository(Canciones::class)->find($id);
+        
         $entityManager = $this->getDoctrine()->getManager();  
-        $entityManager->remove($data);
+        $entityManager->remove($cancionaeliminar);
         $entityManager->flush();
+        $response = new Response();
+        $response->send();
     
         if ($entityManager){
             $this->addFlash(

@@ -23,10 +23,13 @@
     </div>
 {% endfor %}
 
+<script src="/public/js/main.js"></script>
+
+
 <div class="count">
     {{ pagination.getTotalItemCount }}
 </div>
-<table id="table" class="table">
+<table id="articles" class="table">
 <thead class="thead-light">
     <tr>
         {# sorting of properties based on query components #}
@@ -63,7 +66,7 @@
             <td>{{ article.tempo }} </td>
             <td>{{ article.tematica }} </td>
             <td><a class="btn btn-warning" href="{{ path('modificar',{'id': article.id })}}">Modificar</a>
-            <a class="btn btn-danger" data-id="{{article.id}}" href="{{ path('eliminarDatos',{'id': article.id })}}">Eliminar</a></td>
+            <a class="btn btn-danger" href="{{ path('eliminar',{'id': article.id })}}">Eliminar</a></td>
         
         </tr>
     {% endfor %}
@@ -76,6 +79,5 @@
     {{ knp_pagination_render(pagination) }}
 </div>
 
-<script src="/public/js/main.js"></script>
 
 {% endblock %}

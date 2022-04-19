@@ -9,6 +9,15 @@
 
 <a href="{{ path ('paginador') }}">Consultar Canciones</a>
 
+{# Mensaje de nueva canción #}
+{% for flash_message in app.session.flashbag.get('noticeAdicion') %}
+    <div class="alert alert-success" role="alert">
+
+  <strong>AÑADIDA EXITOSAMENTE,</strong>
+        {{ flash_message }}
+    </div>
+{% endfor %}
+
     <h1>Registra tu nueva Canción:</h1> 
 
    <br />
