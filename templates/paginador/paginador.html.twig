@@ -7,18 +7,26 @@
 {% block body %}
 <a href="{{ path('adiciondatos')}}">Registrar Canciones</a> <br><br>
 
-
+{# Mensaje de eliminación #}
 {% for flash_message in app.session.flashbag.get('notice') %}
-    <div class="alert alert-success" role="alert">
+    <div class="alert alert-danger" role="alert">
+    <strong>TU CANCIÓN HA SIDO ELIMINADA,</strong> 
         {{ flash_message }}
     </div>
 {% endfor %}
 
+{# Mensaje de actualización #}
+{% for flash_message in app.session.flashbag.get('noticeupdate') %}
+    <div class="alert alert-success" role="alert">
+  <strong>TU CANCIÓN FUE ACTUALIZADA,</strong>
+        {{ flash_message }}
+    </div>
+{% endfor %}
 
 <div class="count">
     {{ pagination.getTotalItemCount }}
 </div>
-<table class="table">
+<table id="table" class="table">
 <thead class="thead-light">
     <tr>
         {# sorting of properties based on query components #}
@@ -55,7 +63,7 @@
             <td>{{ article.tempo }} </td>
             <td>{{ article.tematica }} </td>
             <td><a class="btn btn-warning" href="{{ path('modificar',{'id': article.id })}}">Modificar</a>
-            <a class="btn btn-danger" href="{{ path('eliminarDatos',{'id': article.id })}}">Eliminar</a></td>
+            <a class="btn btn-danger" data-id="{{article.id}}" href="{{ path('eliminarDatos',{'id': article.id })}}">Eliminar</a></td>
         
         </tr>
     {% endfor %}
@@ -68,5 +76,6 @@
     {{ knp_pagination_render(pagination) }}
 </div>
 
+<script src="/public/js/main.js"></script>
 
 {% endblock %}

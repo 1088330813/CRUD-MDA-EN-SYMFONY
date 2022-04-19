@@ -194,6 +194,7 @@ class PersistirDatosController extends AbstractController
      * @Route("/modificar/{id}", name="modificar")
      */
 
+     
     public function modificarCanciones($id){
          $em = $this->getDoctrine()->getManager();
          $canciones = $em->getRepository(Canciones::class)->find($id);
@@ -206,38 +207,62 @@ class PersistirDatosController extends AbstractController
 
     }
         /**
-     * @Route("/datosmodificados", name="datosmodificados")
+     * @Route("/datosmodificados/{id}", name="datosmodificados")
      */
-    public function DatosModificados(Request $request): Response
+    
+    public function DatosModificados(Request $request,$id): Response
     {       
-        // $em = $this->getDoctrine()->getRepository(Canciones::class)->find($id);
-        // $form = $this->createForm(Canciones::class, $em);
-        // $form->handleRequest($request);
-        // if ($form->isSubmitted()&&$form->isValid()){
-        //     $entityManager = $this->getDoctrine()->getManager();
-        //     $entityManager->persist($em);
-        //     $entityManager->flush();
-        // }
-        
+        $data =$this->getDoctrine()->getRepository(Canciones::class)->find($id);
+
         $ncancion = $request->get("ncancion");
         $tonalidad = $request->get("tonalidad");
         $tempo = $request->get("tempo");
         $tematica = $request->get("tematica");
         $letra = $request->get("letra");
         $genero = $request->get("genero");
-        $enviarCanciones = new Canciones();
-        $enviarCanciones->setNombreCancion($ncancion);
-        $enviarCanciones->setTematica($tematica);
-        $enviarCanciones->setTonalidad($tonalidad);
-        $enviarCanciones->setTempo($tempo);
-        $enviarCanciones->setGenero($genero);
-        $enviarCanciones->setLetra($letra);
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($enviarCanciones);
-        $entityManager->flush();
+
+        $data->setNombreCancion($ncancion);
+        $data->setTematica($tematica);
+        $data->setTonalidad($tonalidad);
+        $data->setTempo($tempo);
+        $data->setGenero($genero);
+        $data->setLetra($letra);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($data);
+        $em->flush();
        
 
-        return $this->render('modificar/datosmodificados.html.twig');
+        if ($em){
+            $this->addFlash('noticeupdate',"Excelente ajuste que le has hecho!");
+
+        return $this->redirectToRoute('paginador');
+        }
+        // }
+        
+
+        // $ncancion = $request->get("ncancion");
+        // $tonalidad = $request->get("tonalidad");
+        // $tempo = $request->get("tempo");
+        // $tematica = $request->get("tematica");
+        // $letra = $request->get("letra");
+        // $genero = $request->get("genero");
+
+        // dd($tonalidad,$ncancion,$tempo);
+        // $enviarCanciones = new Canciones();
+        // $enviarCanciones->setNombreCancion($ncancion);
+        // $enviarCanciones->setTematica($tematica);
+        // $enviarCanciones->setTonalidad($tonalidad);
+        // $enviarCanciones->setTempo($tempo);
+        // $enviarCanciones->setGenero($genero);
+        // $enviarCanciones->setLetra($letra);
+        // $entityManager->persist($enviarCanciones);
+        // $entityManager->flush();
+       
+
+        // return $this->render('modificar/datosmodificados.html.twig',
+        // array('find'=>$data,
+ 
 
 }
    /**
@@ -253,7 +278,7 @@ class PersistirDatosController extends AbstractController
         if ($entityManager){
             $this->addFlash(
                 'notice',
-                'Tus cambios se han guardado!'
+                'Pero quedará en nuestros corazones!'
             );
 
         return $this->redirectToRoute('paginador');

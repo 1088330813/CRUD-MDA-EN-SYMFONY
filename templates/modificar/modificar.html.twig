@@ -12,7 +12,7 @@
    <br />
 <div class="content"> 
 <div class="col-sm-6">
- <form action="{{ path('datosmodificados') }}" method="PUT"> 
+ <form action="{{ path('datosmodificados', {'id': find.id }) }}" method="PUT"> 
   <label for="ncancion">Nombre de Canción:</label><br>
   <input value="{{find.nombreCancion}}" type="text" id="ncancion" name="ncancion" required="required"><br>
   <label for="letra">Letra:</label><br>
@@ -25,7 +25,7 @@
   <input value="{{find.tempo}}" type="number" id="tempo" name="tempo" value=""><br>
   <label for="genero">Genero:</label><br>
   <input value="{{find.genero}}" type="text" id="genero" name="genero" value=""><br><br>
-  <a class="btn btn-warning" href="{{ path('modificar',{'id': find.id })}}">Modificar</a>
+    <button type="submit" class="btn btn-primary">Enviar Cambios</button> <br>
     {# <button type="submit" class="btn btn-primary">Enviar</button> <br> #}
 </form>
 </div>
