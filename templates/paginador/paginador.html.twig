@@ -34,20 +34,20 @@
     <tr>
         {# sorting of properties based on query components #}
         <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}</th>
-        <th{% if pagination.isSorted('a.nombre') %} class="sorted"{% endif %}>
-            {{ knp_pagination_sortable(pagination, 'Nombre de Canción', 'a.nombre') }}
+        <th{% if pagination.isSorted('canciones.nombreCancion') %} class="sorted"{% endif %}>
+            {{ knp_pagination_sortable(pagination, 'Nombre de Canción', 'canciones.nombreCancion') }}
         </th>
-        <th{% if pagination.isSorted('a.genero') %} class="sorted"{% endif %}>
-            {{ knp_pagination_sortable(pagination, 'Genero', 'a.genero') }}
+        <th{% if pagination.isSorted('canciones.genero') %} class="sorted"{% endif %}>
+            {{ knp_pagination_sortable(pagination, 'Genero', 'canciones.genero') }}
         </th>
-          <th{% if pagination.isSorted('a.tonalidad') %} class="sorted"{% endif %}>
-            {{ knp_pagination_sortable(pagination, 'Tonalidad', 'a.tonalidad') }}
+          <th{% if pagination.isSorted('canciones.tonalidad') %} class="sorted"{% endif %}>
+            {{ knp_pagination_sortable(pagination, 'Tonalidad', 'canciones.tonalidad') }}
         </th>
-          <th{% if pagination.isSorted('a.tempo') %} class="sorted"{% endif %}>
-            {{ knp_pagination_sortable(pagination, 'Tempo', 'a.tempo') }}
+          <th{% if pagination.isSorted('canciones.tempo') %} class="sorted"{% endif %}>
+            {{ knp_pagination_sortable(pagination, 'Tempo', 'canciones.tempo') }}
         </th>
-          <th{% if pagination.isSorted('a.tematica') %} class="sorted"{% endif %}>
-          {{ knp_pagination_sortable(pagination, 'Tematica', 'a.tematica') }}
+          <th{% if pagination.isSorted('canciones.tematica') %} class="sorted"{% endif %}>
+          {{ knp_pagination_sortable(pagination, 'Tematica', 'canciones.tematica') }}
         </th>
          <th{% if pagination.isSorted('a.acciones') %} class="sorted"{% endif %}>
           {{ knp_pagination_sortable(pagination, 'Acciones', 'a.acciones') }}
@@ -66,7 +66,7 @@
             <td>{{ article.tempo }} </td>
             <td>{{ article.tematica }} </td>
             <td><a class="btn btn-warning" href="{{ path('modificar',{'id': article.id })}}">Modificar</a>
-            <a class="btn btn-danger" href="{{ path('eliminar',{'id': article.id })}}">Eliminar</a></td>
+            <a class="btn btn-danger" data-id="{{article.id}}" >Eliminar</a></td>
         
         </tr>
     {% endfor %}
